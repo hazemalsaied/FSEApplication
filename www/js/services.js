@@ -1,12 +1,12 @@
 angular.module('fseServices', [])
 
-.service('apiService', function ($http, FSE_API, SITE_NAME) {
+.service('apiService', function ($http, config,FSE_API, SITE_NAME) {
     
     //Get single post
      this.getPost = function ($scope, $stateParams) {
 
         return $http.get(
-            FSE_API.url + "get_post/?post_id=" + $stateParams.postId
+           config.FSE_API + "get_post/?post_id=" + $stateParams.postId
 
         ).then(function successCallback(response) {
             $scope.post = response.data.post;
@@ -18,7 +18,7 @@ angular.module('fseServices', [])
         
         if (pageNum == 1) {    
             return $http.get(
-                FSE_API.url + 'get_posts/')
+                config.FSE_API + 'get_posts/')
                 .then(function (response) {
                     $scope.posts = response.data.posts;
                     $scope.totalPageNum = response.data.pages;
@@ -28,7 +28,7 @@ angular.module('fseServices', [])
         } else if (pageNum <= $scope.totalPageNum ) {
             
             return $http.get(
-                FSE_API.url + 'get_posts/?page=' + pageNum)
+                config.FSE_API + 'get_posts/?page=' + pageNum)
                 .then(function (response) {
                     $scope.posts = $scope.posts.concat(response.data.posts);
                 });
@@ -41,7 +41,7 @@ angular.module('fseServices', [])
 
         if (pageNum == 1) {
             return $http.get(
-                FSE_API.url + "get_category_posts/?category_id=" + $stateParams.catId).
+                config.FSE_API + "get_category_posts/?category_id=" + $stateParams.catId).
             then(function (response) {
                 $scope.posts = response.data.posts;
                 $scope.totalPageNum = response.data.pages;
@@ -51,7 +51,7 @@ angular.module('fseServices', [])
         } else if (pageNum <= $scope.totalPageNum) {
 
             return $http.get(
-                FSE_API.url + "get_category_posts/?category_id=" + $stateParams.catId +'/&page=' + pageNum)
+                config.FSE_API + "get_category_posts/?category_id=" + $stateParams.catId +'/&page=' + pageNum)
                 .then(function (response) {
                     $scope.posts = $scope.posts.concat(response.data.posts);
                 });
@@ -66,7 +66,7 @@ angular.module('fseServices', [])
 
         if (pageNum == 1) {
             return $http.get(
-                FSE_API.url + "get_tag_posts/?tag_id=" + $stateParams.tagId).
+                config.FSE_API + "get_tag_posts/?tag_id=" + $stateParams.tagId).
             then(function (response) {
                 $scope.posts = response.data.posts;
                 $scope.totalPageNum = response.data.pages;
@@ -76,7 +76,7 @@ angular.module('fseServices', [])
         } else if (pageNum <= $scope.totalPageNum) {
 
             return $http.get(
-                FSE_API.url + "get_tag_posts/?tag_id=" + $stateParams.tagId +'/&page=' + pageNum)
+                config.FSE_API + "get_tag_posts/?tag_id=" + $stateParams.tagId +'/&page=' + pageNum)
                 .then(function (response) {
                     $scope.posts = $scope.posts.concat(response.data.posts);
                 });

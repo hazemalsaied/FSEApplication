@@ -4,7 +4,7 @@ angular.module('fseControllers', ['fseServices', 'ngCordova'])
 
         apiService.getCats($scope);
     })
-    .controller('postsCtrl', function ($scope, apiService, $location, $ionicNavBarDelegate) {
+    .controller('postsCtrl', function ($scope, apiService, $location) {
 
         $scope.pageNum = 1;
         apiService.getPosts($scope, $scope.pageNum);
@@ -23,12 +23,6 @@ angular.module('fseControllers', ['fseServices', 'ngCordova'])
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         };
-    
-//        var path = $location.path();
-//        if (path.indexOf('submit') != -1)
-//         $ionicNavBarDelegate.showBackButton(false);
-//        else
-//         $ionicNavBarDelegate.showBackButton(true);
     })
 
 .controller('catPostsCtrl', function ($scope, $stateParams, apiService) {
@@ -85,16 +79,16 @@ angular.module('fseControllers', ['fseServices', 'ngCordova'])
 
 })
 
-.controller('contactCtrl', function ($scope, SITE_NAME, CONTACT_MAIL, $cordovaEmailComposer) {
+.controller('contactCtrl', function ($scope, config, SITE_NAME, $cordovaEmailComposer) {
 
-    $scope.pageTitle = SITE_NAME.name;
+    $scope.pageTitle = config.SITE_NAME;
 
     $scope.submit = function (username, email, msg) {
 
         $cordovaEmailComposer.isAvailable().then(function() {
           
             var message = {
-            to: CONTACT_MAIL.mail,
+            to: config.CONTACT_MAIL,
             subject: 'رسالة من :' + username + '  '+ email ,
             body: msg,
             isHtml: true
@@ -108,7 +102,7 @@ angular.module('fseControllers', ['fseServices', 'ngCordova'])
             // not available
         });
         var message = {
-            to: CONTACT_MAIL.mail,
+            to: config.CONTACT_MAIL,
             subject: 'رسالة من :' + username + '  '+ email ,
             body: msg,
             isHtml: true
@@ -121,6 +115,6 @@ angular.module('fseControllers', ['fseServices', 'ngCordova'])
 
     };
 })
-.controller('homeCtrl', function ($scope, SITE_NAME) {
-    $scope.pageTitle = SITE_NAME.name;
+.controller('homeCtrl', function ($scope, config) {
+    $scope.pageTitle = config.SITE_NAME;
 });

@@ -6,16 +6,15 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'fseControllers', 'ngSanitize', 'ngCordova'])
 
+.constant('config', {
+    FSE_API: 'http://localhost:8100/api/',
+    SITE_NAME: 'أيفل',
+    CONTACT_MAIL: 'CONTACT_MAIL',
+    API: 'https://public-api.wordpress.com/rest/v1.1/sites/fse-nancy.fr/'
+})
 .constant('FSE_API', {
-//  url: 'http://localhost:8100/api/'
-//              ,
-//  "proxies": [
-//    {
-//      "path": "/api",
-//      "proxyUrl": "http://fse-nancy.fr/api"
-//    }
-//  ]
-    url: 'http://fse-nancy.fr/api/'
+  url: 'http://localhost:8100/api/'
+//    url: 'http://fse-nancy.fr/api/'
 })
 
 .constant('SITE_NAME', {
